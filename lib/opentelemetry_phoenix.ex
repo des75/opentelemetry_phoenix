@@ -62,7 +62,7 @@ defmodule OpentelemetryPhoenix do
       {__MODULE__, :endpoint_start},
       opts[:endpoint_prefix] ++ [:start],
       &__MODULE__.handle_endpoint_start/4,
-      %{}
+      Application.get_env(:opentelemetry_phoenix, :config, %{})
     )
   end
 
@@ -72,7 +72,7 @@ defmodule OpentelemetryPhoenix do
       {__MODULE__, :endpoint_stop},
       opts[:endpoint_prefix] ++ [:stop],
       &__MODULE__.handle_endpoint_stop/4,
-      %{}
+      Application.get_env(:opentelemetry_phoenix, :config, %{})
     )
   end
 
@@ -82,7 +82,7 @@ defmodule OpentelemetryPhoenix do
       {__MODULE__, :router_dispatch_start},
       [:phoenix, :router_dispatch, :start],
       &__MODULE__.handle_router_dispatch_start/4,
-      %{}
+      Application.get_env(:opentelemetry_phoenix, :config, %{})
     )
   end
 
@@ -92,11 +92,17 @@ defmodule OpentelemetryPhoenix do
       {__MODULE__, :router_dispatch_exception},
       [:phoenix, :router_dispatch, :exception],
       &__MODULE__.handle_router_dispatch_exception/4,
-      %{}
+      Application.get_env(:opentelemetry_phoenix, :config, %{})
     )
   end
 
   @doc false
+  def handle_endpoint_start(event, measurements, %{conn: conn} = c, %{"ignored_paths" => ignored_paths} = config) do
+    unless Enum.member?(ignored_paths, conn.request_path) do
+      handle_endpoint_start(event, measurements, c, Map.drop(config, ["ignored_paths"]))
+    end
+  end
+
   def handle_endpoint_start(_event, _measurements, %{conn: %{adapter: adapter} = conn}, _config) do
     # TODO: maybe add config for what paths are traced? Via sampler?
     :otel_propagator.text_map_extract(conn.req_headers)
@@ -130,11 +136,29 @@ defmodule OpentelemetryPhoenix do
 
   @doc false
   def handle_endpoint_stop(_event, _measurements, %{conn: conn}, _config) do
-    span_ctx = Tracer.current_span_ctx()
-    Span.set_attribute(span_ctx, :"http.status", conn.status)
-    Span.end_span(span_ctx)
+    case Tracer.current_span_ctx() do
+      :undefined ->
+        :ok
+
+      span_ctx ->
+        Span.set_attribute(span_ctx, :"http.status", conn.status)
+        Span.end_span(span_ctx)
+    end
   end
 
+  @spec handle_router_dispatch_start(
+          any,
+          any,
+          atom
+          | %{
+              :conn => atom | %{:method => any, optional(any) => any},
+              :plug => any,
+              :plug_opts => any,
+              :route => any,
+              optional(any) => any
+            },
+          any
+        ) :: boolean
   @doc false
   def handle_router_dispatch_start(_event, _measurements, meta, _config) do
     attributes = [

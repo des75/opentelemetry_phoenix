@@ -146,8 +146,9 @@ defmodule OpentelemetryPhoenix do
       span_ctx ->
         Span.set_attribute(span_ctx, :"http.status", conn.status)
         Span.end_span(span_ctx)
+        Span.end_span(Tracer.current_span_ctx())
 
-        __MODULE__.handle_endpoint_stop(event, measurements, c, config)
+        # __MODULE__.handle_endpoint_stop(event, measurements, c, config)
     end
   end
 

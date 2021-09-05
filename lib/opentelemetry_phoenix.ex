@@ -107,6 +107,9 @@ defmodule OpentelemetryPhoenix do
     # TODO: maybe add config for what paths are traced? Via sampler?
     :otel_propagator.text_map_extract(conn.req_headers)
 
+    new_ctx_0 = Tracer.start_span("qwerty")
+    _ = Tracer.set_current_span(new_ctx_0)
+
     span_name = "HTTP #{conn.method}"
     new_ctx = Tracer.start_span(span_name, %{kind: :SERVER})
     _ = Tracer.set_current_span(new_ctx)
@@ -135,7 +138,7 @@ defmodule OpentelemetryPhoenix do
   end
 
   @doc false
-  def handle_endpoint_stop(_event, _measurements, %{conn: conn}, _config) do
+  def handle_endpoint_stop(event, measurements, c = %{conn: conn}, config) do
     case Tracer.current_span_ctx() do
       :undefined ->
         :ok
@@ -143,6 +146,8 @@ defmodule OpentelemetryPhoenix do
       span_ctx ->
         Span.set_attribute(span_ctx, :"http.status", conn.status)
         Span.end_span(span_ctx)
+
+        __MODULE__.handle_endpoint_stop(event, measurements, c, config)
     end
   end
 

@@ -22,8 +22,36 @@ may be supplied.
 ```elixir
 def deps do
   [
-    {:opentelemetry_phoenix, "~> 0.2.0"}
+    {:opentelemetry_phoenix, "~> 1.0"}
   ]
 end
 ```
+
+## Compatibility Matrix
+
+| OpentelemetryPhoenix Version | Otel Version | Notes |
+| :--------------------------- | :----------- | :---- |
+|                              |              |       |
+| v0.1.0                       | <= v.0.5.0   |       |
+| v1.0.0-rc.3                  | v1.0.0-rc.1  |       |
+|                              | v1.0.0-rc.2  |       |
+| v1.0.0-rc.4                  | v1.0.0-rc.2  | Otel rc.3 will be a breaking change |
+| v1.0.0-rc.5                  | v1.0.0-rc.3  |       |
+| v1.0.0-rc.6                  | v1.0.0-rc.4  |       |
+| v1.0                         | v1.0         |       |
+
+## Note on phoenix integration
+
+`OpentelemetryPhoenix` requires phoenix to use `Plug.Telemetry` in order to correctly trace endpoint calls.
+
+The `endpoint.ex` file should look like:
+```Elixir
+defmodule MyApp.Endpoint do
+  use Phoenix.Endpoint, otp_app: :my_app
+  ...
+  plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
+  ...
+end
+```
+The [Phoenix endpoint.ex template](https://github.com/phoenixframework/phoenix/blob/v1.6.0/installer/templates/phx_web/endpoint.ex#L39) can be used as a reference
 

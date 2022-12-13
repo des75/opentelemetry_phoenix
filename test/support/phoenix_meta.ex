@@ -36,7 +36,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{},
-        before_send: [],
         body_params: %{},
         cookies: %{},
         halted: false,
@@ -118,7 +117,6 @@ defmodule PhoenixMeta do
                version: :"HTTP/1.1"
              }},
           assigns: %{},
-          before_send: [],
           body_params: %{},
           cookies: %{},
           halted: false,
@@ -245,7 +243,6 @@ defmodule PhoenixMeta do
                version: :"HTTP/1.1"
              }},
           assigns: %{},
-          before_send: [],
           body_params: %{},
           cookies: %{},
           halted: false,
@@ -403,7 +400,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{},
-        before_send: [],
         body_params: %{},
         cookies: %{},
         halted: false,
@@ -501,7 +497,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{layout: {MyStoreWeb.LayoutView, "app.html"}},
-        before_send: [],
         body_params: %{},
         cookies: %{},
         halted: false,
@@ -607,7 +602,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{},
-        before_send: [],
         body_params: %{},
         cookies: %{},
         halted: false,
@@ -687,6 +681,8 @@ defmodule PhoenixMeta do
                "cache-control" => "max-age=0",
                "connection" => "keep-alive",
                "host" => "localhost:4000",
+               "traceparent" => "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01",
+               "tracestate" => "congo=t61rcWkgMzE",
                "upgrade-insecure-requests" => "1",
                "user-agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"
              },
@@ -706,7 +702,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{},
-        before_send: [],
         body_params: %Plug.Conn.Unfetched{aspect: :body_params},
         cookies: %{},
         halted: false,
@@ -732,6 +727,8 @@ defmodule PhoenixMeta do
           {"cache-control", "max-age=0"},
           {"connection", "keep-alive"},
           {"host", "localhost:4000"},
+          {"traceparent", "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01"},
+          {"tracestate", "congo=t61rcWkgMzE"},
           {"upgrade-insecure-requests", "1"},
           {"user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"}
         ],
@@ -768,6 +765,8 @@ defmodule PhoenixMeta do
                "cache-control" => "max-age=0",
                "connection" => "keep-alive",
                "host" => "localhost:4000",
+               "traceparent" => "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01",
+               "tracestate" => "congo=t61rcWkgMzE",
                "upgrade-insecure-requests" => "1",
                "user-agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"
              },
@@ -787,7 +786,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{},
-        before_send: [],
         body_params: %Plug.Conn.Unfetched{aspect: :body_params},
         cookies: %{},
         halted: false,
@@ -813,6 +811,8 @@ defmodule PhoenixMeta do
           {"cache-control", "max-age=0"},
           {"connection", "keep-alive"},
           {"host", "localhost:4000"},
+          {"traceparent", "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01"},
+          {"tracestate", "congo=t61rcWkgMzE"},
           {"upgrade-insecure-requests", "1"},
           {"user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"}
         ],
@@ -849,6 +849,8 @@ defmodule PhoenixMeta do
                "cache-control" => "max-age=0",
                "connection" => "keep-alive",
                "host" => "localhost:4000",
+               "traceparent" => "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01",
+               "tracestate" => "congo=t61rcWkgMzE",
                "upgrade-insecure-requests" => "1",
                "user-agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"
              },
@@ -868,7 +870,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{},
-        before_send: [],
         body_params: %{},
         cookies: %{},
         halted: false,
@@ -897,6 +898,8 @@ defmodule PhoenixMeta do
           {"cache-control", "max-age=0"},
           {"connection", "keep-alive"},
           {"host", "localhost:4000"},
+          {"traceparent", "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01"},
+          {"tracestate", "congo=t61rcWkgMzE"},
           {"upgrade-insecure-requests", "1"},
           {"user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"}
         ],
@@ -939,6 +942,8 @@ defmodule PhoenixMeta do
                "cache-control" => "max-age=0",
                "connection" => "keep-alive",
                "host" => "localhost:4000",
+               "traceparent" => "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01",
+               "tracestate" => "congo=t61rcWkgMzE",
                "upgrade-insecure-requests" => "1",
                "user-agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"
              },
@@ -958,7 +963,6 @@ defmodule PhoenixMeta do
              version: :"HTTP/1.1"
            }},
         assigns: %{},
-        before_send: [],
         body_params: %{},
         cookies: %{},
         halted: false,
@@ -987,6 +991,8 @@ defmodule PhoenixMeta do
           {"cache-control", "max-age=0"},
           {"connection", "keep-alive"},
           {"host", "localhost:4000"},
+          {"traceparent", "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01"},
+          {"tracestate", "congo=t61rcWkgMzE"},
           {"upgrade-insecure-requests", "1"},
           {"user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0"}
         ],
